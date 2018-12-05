@@ -1,0 +1,41 @@
+<div class="form-group row">
+  <div class="col-sm-4">
+    <input #searchBox id="search-box" (input)="search(searchBox.value)" class="form-control" placeholder="Search User" />
+  </div>
+</div>
+<table class="table table-sm">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Profile Picture</th>
+      <th>Email</th>
+      <th>User Registered Since</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let user of users">
+      <td>
+        <label (mousemove)="mouseEnter(user.name.last + ', ' + user.name.first, user.location.coordinates.latitude, user.location.coordinates.longitude)">
+          {{user.name.last | titlecase }}, {{user.name.first | titlecase}}
+        </label>
+      </td>
+      <td><img src={{user.picture.thumbnail}} class="img-circle"></td>
+      <td>{{user.email}}</td>
+      <td>Registered {{getDuration(user.registered.date)}}</td>
+    </tr>
+  </tbody>
+</table>
+<ul class="pagination">
+  <li class="page-item" *ngFor="let number of numbers"><a class="page-link" routerLink="/Users/{{number}}"
+      routerLinkActive="active">{{number}}</a></li>
+</ul>
+
+<div id="myModal" class="modal fade" role="dialog" *ngIf="!DisplayPopup">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        test
+      </div>
+    </div>
+  </div>
+</div>
